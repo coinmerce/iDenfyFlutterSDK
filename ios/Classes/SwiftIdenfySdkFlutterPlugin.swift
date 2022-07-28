@@ -18,11 +18,11 @@ public class SwiftIdenfySdkFlutterPlugin: NSObject, FlutterPlugin {
             if let arguments = call.arguments as? [String: Any],
                let authToken = arguments["authToken"] as? String {
 
+                IdenfyCommonColors.idenfyMainColorV2 = UIColor.green
+                
                 let idenfySettingsV2 = IdenfyBuilderV2()
                     .withAuthToken(authToken)
                     .build()
-                
-                IdenfyCommonColors.idenfyMainColorV2 = UIColor.green
 
                 let idenfyController = IdenfyController.shared
                 idenfyController.initializeIdenfySDKV2WithManual(idenfySettingsV2: idenfySettingsV2)
