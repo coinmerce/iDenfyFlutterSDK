@@ -19,6 +19,10 @@ public class SwiftIdenfySdkFlutterPlugin: NSObject, FlutterPlugin {
                let authToken = arguments["authToken"] as? String {
 
                 IdenfyCommonColors.idenfyMainColorV2 = UIColor.green
+                IdenfyCommonColors.idenfyMainDarkerColorV2 = UIColor.green
+                IdenfyCommonColors.idenfyBackgroundColorV2 = UIColor.red
+                IdenfyCommonColors.idenfySecondColorV2 = UIColor.yellow
+                IdenfyCommonColors.idenfyGradientAccentV2 = UIColor.orange
                 
                 let idenfySettingsV2 = IdenfyBuilderV2()
                     .withAuthToken(authToken)
