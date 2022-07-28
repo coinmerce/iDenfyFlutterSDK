@@ -43,6 +43,7 @@ class _MyAppState extends State<MyApp> {
     if (response.statusCode == 201) {
       return jsonDecode(response.body)["authToken"];
     } else {
+      print(response.body);
       throw Exception('Failed to fetch token');
     }
   }

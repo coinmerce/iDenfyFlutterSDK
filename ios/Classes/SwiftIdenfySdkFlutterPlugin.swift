@@ -22,10 +22,8 @@ public class SwiftIdenfySdkFlutterPlugin: NSObject, FlutterPlugin {
                     .withAuthToken(authToken)
                     .build()
                 
-                IdenfyCommonColors.idenfyMainColorV2 = UIColor.green
-                IdenfyCommonColors.idenfyMainDarkerColorV2 = UIColor.green
-                IdenfyCommonColors.idenfyBackgroundColorV2 = UIColor.red
-                IdenfyCommonColors.idenfySecondColorV2 = UIColor.yellow
+                IdenfyCommonColors.idenfyMainColorV2 = UIColor.init("0082FF")
+                IdenfyCommonColors.idenfyMainDarkerColorV2 = UIColor.init("007EF5")
 
                 let idenfyController = IdenfyController.shared
                 idenfyController.initializeIdenfySDKV2WithManual(idenfySettingsV2: idenfySettingsV2)
