@@ -2,6 +2,7 @@ import Flutter
 import UIKit
 import iDenfySDK
 import idenfycore
+import idenfyviews
 
 public class SwiftIdenfySdkFlutterPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
@@ -20,6 +21,8 @@ public class SwiftIdenfySdkFlutterPlugin: NSObject, FlutterPlugin {
                 let idenfySettingsV2 = IdenfyBuilderV2()
                     .withAuthToken(authToken)
                     .build()
+                
+                IdenfyCommonColors.idenfyMainColorV2 = UIColor.green
 
                 let idenfyController = IdenfyController.shared
                 idenfyController.initializeIdenfySDKV2WithManual(idenfySettingsV2: idenfySettingsV2)
