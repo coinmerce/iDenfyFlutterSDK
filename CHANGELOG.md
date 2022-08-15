@@ -1,3 +1,26 @@
+## 1.8.1
+
+* Android SDK updated to 7.5.1
+* Fixed a bug with uploading photos from device storage
+
+## 1.8.0
+
+* IOS, Android SDK's updated to 7.5.0
+* Updated Face Authentication flow, from now existing users will able use face authentication flow as well
+
+## 1.7.3
+
+* IOS SDK updated to 7.4.3
+* NFC Reading now supports PACE reading method
+* Android SDK updated to 7.4.2
+* Added Dutch translations
+* Bug fixes
+
+## 1.7.2
+
+* IOS SDK updated to 7.4.2
+* Bug fixes
+
 ## 1.7.1
 
 * Code formatting
@@ -8,7 +31,7 @@
 
 * Android SDK updated to 7.4.1
 * IOS SDK updated to 7.4.0
-* New Face Reauthentication feature introduced. More on this feature, read [here](https://documentation.idenfy.com/other-fraud/FaceReauthentication).
+* New Face Authentication feature introduced. More on this feature, read [here](https://documentation.idenfy.com/other-fraud/FaceAuthentication).
 * Bug fixes
 
 ## 1.6.0
