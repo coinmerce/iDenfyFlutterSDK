@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Coinmerce_logo (1).svg",
+      "filename" : "Coinmerce_icon (1).svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Coinmerce_logo_2x (1).svg",
+      "filename" : "Coinmerce_icon_2x (1).svg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Coinmerce_logo_3x.svg",
+      "filename" : "Coinmerce_icon_3x (1).svg",
       "idiom" : "universal",
       "scale" : "3x"
     }
