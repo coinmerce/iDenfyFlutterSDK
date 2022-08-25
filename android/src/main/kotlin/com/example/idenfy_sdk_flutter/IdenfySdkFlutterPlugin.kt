@@ -6,6 +6,8 @@ import androidx.annotation.NonNull
 import com.google.gson.Gson
 import com.idenfy.idenfySdk.CoreSdkInitialization.IdenfyController
 import com.idenfy.idenfySdk.api.initialization.IdenfySettingsV2
+import com.idenfy.idenfySdk.api.initialization.IdenfyUISettingsV2
+import com.idenfy.idenfySdk.api.models.IdenfyOnBoardingViewTypeEnum
 import com.idenfy.idenfySdk.api.response.FaceAuthenticationResult
 import com.idenfy.idenfySdk.api.response.IdenfyIdentificationResult
 import com.idenfy.idenfySdk.faceauthentication.api.FaceAuthenticationInitialization
