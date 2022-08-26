@@ -10,6 +10,7 @@ import com.idenfy.idenfySdk.api.ui.IdenfyUISettingsV2
 import com.idenfy.idenfySdk.api.models.IdenfyOnBoardingViewTypeEnum
 import com.idenfy.idenfySdk.api.response.FaceAuthenticationResult
 import com.idenfy.idenfySdk.api.response.IdenfyIdentificationResult
+import com.idenfy.idenfySdk.camerasession.commoncamerasession.presentation.model.IdenfyInstructionsType
 import com.idenfy.idenfySdk.faceauthentication.api.FaceAuthenticationInitialization
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -44,6 +45,7 @@ class IdenfySdkFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware, P
       val idenfyUISettingsV2 =
               IdenfyUISettingsV2.IdenfyUIBuilderV2()
                       .withConfirmationView(IdenfyOnBoardingViewTypeEnum.NONE)
+                      .withInstructions(IdenfyInstructionsType.DIALOG)
                       .build()
 
       val idenfySettingsV2 = IdenfySettingsV2.IdenfyBuilderV2()
