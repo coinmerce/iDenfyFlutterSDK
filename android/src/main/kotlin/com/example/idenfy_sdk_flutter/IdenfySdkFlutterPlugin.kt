@@ -41,20 +41,13 @@ class IdenfySdkFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware, P
     if (call.method == "getPlatformVersion") {
       result.success("Android " + android.os.Build.VERSION.RELEASE);
     } else if (call.method == "start") {
-      mResult = result
-      val idenfyUISettingsV2 =
-              IdenfyUISettingsV2.IdenfyUIBuilderV2()
-                      .withConfirmationView(IdenfyOnBoardingViewTypeEnum.NONE)
-                      .withInstructions(IdenfyInstructionsType.DIALOG)
-                      .build()
+    mResult = result
+    val idenfySettingsV2 = IdenfySettingsV2.IdenfyBuilderV2()
+            .withAuthToken(call.argument<String>("authToken")!!)
+            .build()
 
-      val idenfySettingsV2 = IdenfySettingsV2.IdenfyBuilderV2()
-              .withAuthToken(call.argument<String>("authToken")!!)
-              .withIdenfyUISettingsV2(idenfyUISettingsV2)
-              .build()
-
-      IdenfyController.getInstance().initializeIdenfySDKV2WithManual(this.activity, IdenfyController.IDENFY_REQUEST_CODE, idenfySettingsV2)
-    } else if (call.method == "startFaceAuth") {
+    IdenfyController.getInstance().initializeIdenfySDKV2WithManual(this.activity, IdenfyController.IDENFY_REQUEST_CODE, idenfySettingsV2)
+  } else if (call.method == "startFaceAuth") {
       mResult = result
       val faceAuthenticationInitialization = FaceAuthenticationInitialization(call.argument<String>("token")!!, call.argument<Boolean>("withImmediateRedirect")!!)
       IdenfyController.getInstance().initializeFaceAuthenticationSDKV2(this.activity, IdenfyController.IDENFY_REQUEST_CODE, faceAuthenticationInitialization)
