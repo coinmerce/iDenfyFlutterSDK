@@ -1,3 +1,14 @@
+## 1.9.2
+
+* Android SDK updated to 7.6.1
+* Fixed an IMPORTANT cameraX bug for document step
+
+## 1.9.1
+
+* IOS SDK updated to 7.6.2
+* CoreNFC framework set to optional, due to compile errors on IOS lower than 13
+* Fixed a memory leak
+
 ## 1.9.0
 
 * Android and IOS SDK's updated to 7.6.0
