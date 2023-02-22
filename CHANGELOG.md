@@ -1,3 +1,68 @@
+## 2.0.8
+* Android SDK updated to 7.7.9
+* Updated Lottie dependency, removed usages of a deleted **lottie_scale** function
+
+## 2.0.7
+* Android SDK updated to 7.7.8
+* iOS SDK updated to 7.7.7
+* Updated Border Crossing, Asylum Residence Permit, Provisional Drivers License translations
+* Logging updates
+
+## 2.0.6
+* Android SDK updated to 7.7.7
+* iOS SDK updated to 7.7.6
+* Face Authentication EXIT status will always be returned, even if SDK was not closed properly
+
+## 2.0.5
+* Android, iOS SDK's updated to 7.7.5
+* Updated National passport translations
+* Opacity changed for document selection continue button disabled state
+* Android NFC Reading feature moved to a separate module. [Details](https://documentation.idenfy.com/mobile/Android/android-sdk#nfc-support)
+
+## 2.0.4
+* Android SDK updated to 7.7.3
+* iOS SDK updated to 7.7.4
+* Added Address Card document type
+* Updated Android CameraX library
+* Updated Document Recognition [feature](https://documentation.idenfy.com/mobile/Android/android-sdk#document-recognition)
+
+## 2.0.3
+* iOS SDK updated to 7.7.3
+* Using a stable version (3.5.0) of lottie-ios since the new one is crashing
+* Changed default WKWebView zoom in privacy policy [feature](https://documentation.idenfy.com/mobile/iOS/ios-sdk#custom-privacy-policy)
+
+## 2.0.2
+* Android, iOS SDK's updated to 7.7.2
+* Added Thai, Indonesian, Hindi, Hungarian [locales](https://documentation.idenfy.com/mobile/Android/android-sdk#localization)
+* Fixed ID Card translations in Czech [locale](https://documentation.idenfy.com/mobile/Android/android-sdk#localization)
+* iOS UIWebView migrated to WKWebView in privacy policy [feature](https://documentation.idenfy.com/mobile/iOS/ios-sdk#custom-privacy-policy)
+
+## 2.0.1
+
+* Android SDK updated to 7.7.1
+* Added Slovak [locale](https://documentation.idenfy.com/mobile/Android/android-sdk#localization)
+* [Document recognition](https://documentation.idenfy.com/mobile/Android/android-sdk#document-recognition) feature files moved to a separate module, to decrease main SDK size.
+
+## 2.0.0
+
+* IOS SDK updated to 7.7.1
+* Android SDK updated to 7.7.0
+* Added custom KYC questionnaire feature. [More](https://documentation.idenfy.com/mobile/iOS/ios-sdk#custom-kyc-questionnaire)
+* Added custom privacy policy feature. [More](https://documentation.idenfy.com/mobile/iOS/ios-sdk#custom-privacy-policy)
+* Added Ukrainian, Portuguese, Vietnamese [locales](https://documentation.idenfy.com/mobile/iOS/ios-sdk#localization)
+* Updated document issuing country list
+* Updated Kotlin (1.6.21), Compose (1.2.0-rc02) versions in Android
+* CompileSdkVersion raised to API 33 in Android
+* Bug fixes
+
+## 1.9.4
+
+* IOS SDK updated to 7.6.4
+* Language selection fix on face authentication screen
+* Android SDK updated to 7.6.3
+* Photo result detail cards are now optional (No need to override them in the XML)
+* Face authentication views set as optional for easier customisation
+
 ## 1.9.3
 
 * IOS SDK updated to 7.6.3
