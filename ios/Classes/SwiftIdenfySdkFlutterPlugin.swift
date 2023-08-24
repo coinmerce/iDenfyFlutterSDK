@@ -99,6 +99,8 @@ extension UIColor {
               alpha: alpha)
   }
 
+}
+
 class IdenfySettingsDecoder {
     
     static func decodeFaceAuthUISettings(_ json: [String: AnyObject?]?) -> IdenfyFaceAuthUISettings {
