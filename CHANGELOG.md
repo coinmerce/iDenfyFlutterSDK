@@ -1,3 +1,28 @@
+## 2.3.1
+* iOS, Android SDK's updated to 8.1.0
+* Added an option to skip Camera On Boarding View on Face authentication. [More](https://documentation.idenfy.com/other-fraud/FaceAuthentication)
+
+## 2.3.0
+* iOS SDK updated to 8.0.0
+* Android SDK updated to 8.0.1
+* Added Face authentication using face matching & passive liveness. [More](https://documentation.idenfy.com/other-fraud/FaceAuthentication)
+
+## 2.2.1
+* iOS SDK updated to 7.9.1
+* Fixed an issue with document video frames being mixed up
+
+## 2.2.0
+* Android, iOS SDK's updated to 7.9.0
+* Face Liveness detection version updated
+* Android CameraX version updated
+* SK translations fixed
+* Removed Android external storage permission
+* Screen now stays awake in manual review
+* Various cases with process death handled in Android
+* Swedish Social Security card document type added
+* iOS Lottie version updated
+* Various UI bugs fixed
+
 ## 2.1.0
 * Android, iOS SDK's updated to 7.8.1
 * Removed Android Fotoaparat library (our fallback camera) since it is no longer compatible with AGP 7.4+
