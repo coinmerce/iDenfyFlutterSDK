@@ -1,11 +1,11 @@
 buildscript {
     ext {
-        compose_version = '1.2.0-rc02'
+        compose_version = '1.4.0-alpha02'
     }
-    ext.kotlin_version = '1.6.21'
+    ext.kotlin_version = '1.7.21'
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
@@ -17,7 +17,7 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
         maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
         maven { url 'https://jitpack.io' }
     }
