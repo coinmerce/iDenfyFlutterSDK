@@ -38,7 +38,7 @@ post_install do |installer|
     end
     if target.name == "idenfy_sdk_flutter"
       target.build_configurations.each do |config|
-        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
         config.build_settings['ENABLE_BITCODE'] = 'NO'
       end
     end
@@ -49,7 +49,7 @@ end
 
 Minimum required versions by the platform:
 
-**IOS - 12.0**
+**IOS - 13.0**
 
 **Android - API 24**
 
@@ -61,7 +61,7 @@ Once the setup is completed successfully, you can add iDenfy SDK dependencies.
 To add iDenfy SDK plugin, open your project's `pubspec.yaml` file and append it with the latest iDenfy SDK flutter plugin:
 ```yaml
 dependencies:
-  idenfy_sdk_flutter: ^2.4.2
+  idenfy_sdk_flutter: ^2.5.2
 ```
 
 #### 3.1 Configuring Android project
@@ -78,10 +78,6 @@ Configure your application's `gradle.properties` file:
 ```gradle
 android.useAndroidX=true
 android.enableJetifier=true
-//For gradle 7+
-android.jetifier.ignorelist=bcprov
-//otherwise
-android.jetifier.blacklist=bcprov
 ```
 
 Make sure you are using Kotlin >= 1.5.31 version (Since 1.5 version of iDenfy package)
@@ -134,7 +130,7 @@ post_install do |installer|
     end
     if target.name == "idenfy_sdk_flutter"
       target.build_configurations.each do |config|
-        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
         config.build_settings['ENABLE_BITCODE'] = 'NO'
       end
     end
@@ -142,7 +138,7 @@ post_install do |installer|
   end
 end
 ```
-This script ensures that "lottie-ios" have module stability as well as IOS 12.0 support, which is required for the NFC feature.
+This script ensures that "lottie-ios" have module stability as well as IOS 13.0 support, which is required for the NFC feature.
 #### 3. Running pod install
 After that, install the pods:
 ```shell
@@ -195,17 +191,6 @@ end
 ```
 
 #### Android
-If this error occurs:
-
-Failed to transform bcprov-jdk15on-1.69.jar (org.bouncycastle:bcprov-jdk15on:1.69) to match attributes {artifactType=android-java-res, org.gradle.category=library, org.gradle.libraryelements=jar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-
-Be sure to add the following lines to your application's `gradle.properties` file:
-```gradle
-//For gradle 7+
-android.jetifier.ignorelist=bcprov
-//otherwise
-android.jetifier.blacklist=bcprov
-```
 
 ##### Proguard rules
 
@@ -267,7 +252,6 @@ const String BASE_URL = 'ivs.idenfy.com';
 const String clientId = 'idenfySampleClientID';
 const String apiKey = 'PUT_YOUR_IDENFY_API_KEY_HERE';
 const String apiSecret = 'PUT_YOUR_IDENFY_API_SECRET_HERE';
-const FaceAuthenticationMethod faceAuthenticationMethod = FaceAuthenticationMethod.ACTIVE_LIVENESS;
 ```
 
 Calling IdenfySdkFlutter.start with provided authToken:
@@ -300,27 +284,19 @@ After successful integration you should be able to call IdenfySdkFlutter.startFa
 
 If the project is not successfully compiled or runtime issues occur, make sure you have followed the steps. For better understanding you may check the sample app in this repository.
 
-Firsty, you should check for the authentication status, whether the face authentication can be performed. Having checked that, you will receive a token status:
+Firstly, you should check for the authentication status, whether the face authentication can be performed. Having checked that, you will receive a token status:
 
 | Name             | Description                                                                                                                                      |
 |------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| `ENROLLMENT`     | The user must perform an enrollment, since the identification was performed with an older face tec version (Before face authentication update)   |
 | `AUTHENTICATION` | The user can authenticate by face                                                                                                                |
-| `IDENTIFICATION` | The user must perform an identification
-
-ENROLLMENT only applies to ACTIVE_LIVENESS authentication method and from a user perspective is identical to AUTHENTICATION, although ENROLLMENT is basically registration for authentication - whichever face client used for enrollment, that face will then work for subsequent authentications.
-
-Enrollment is recommended to be used for these cases:
-1. Client was on-boarded using an old version of the SDK and therefore not registered for authentication.
-2. Client failed an automated liveliness check during on-boarding and therefore was not registered for authentication.
-3. Client is registered for authentication, but for whatever reason wishes to change the face used for authentication.
+| `IDENTIFICATION` | The user must perform an identification                                                                                                          |
 
 Everything can be done with following code, found in the example app:
 
 ```javascript
-  Future<String> getFaceAuthTokenType(String scanref, FaceAuthenticationMethod authenticationMethod) async {
+  Future<String> getFaceAuthTokenType(String scanref, String authenticationMethod) async {
     final queryParameters = {
-      'method': authenticationMethod.name,
+      'method': authenticationMethod,
     };
     final response = await http.get(
       Uri.https(Constants.BASE_URL,
@@ -339,7 +315,7 @@ Everything can be done with following code, found in the example app:
     }
   }
 
-  Future<String> getFaceAuthTokenRequest(String scanref, String tokenType, FaceAuthenticationMethod authenticationMethod) async {
+  Future<String> getFaceAuthTokenRequest(String scanref, String tokenType, String authenticationMethod) async {
     final response = await http.post(
       Uri.https(Constants.BASE_URL, '/partner/authentication-info'),
       headers: <String, String>{
@@ -352,7 +328,7 @@ Everything can be done with following code, found in the example app:
       body: jsonEncode(<String, String>{
         "scanRef": scanref,
         "type": tokenType,
-        "method": authenticationMethod.name
+        "method": authenticationMethod
       }),
     );
     if (response.statusCode == 200) {
@@ -363,7 +339,7 @@ Everything can be done with following code, found in the example app:
   }
 
   Future<void> initIdenfyFaceAuth(String scanref) async {
-    FaceAuthenticationMethod authenticationMethod = Constants.faceAuthenticationMethod;
+    String authenticationMethod = "FACE_MATCHING";
   
     FaceAuthenticationResult? faceAuthenticationResult;
     Exception? localException;
@@ -373,10 +349,6 @@ Everything can be done with following code, found in the example app:
       switch (faceAuthTokenType) {
         case 'AUTHENTICATION':
           //The user can authenticate by face
-          token = await getFaceAuthTokenRequest(scanref, faceAuthTokenType, authenticationMethod);
-          break;
-        case 'ENROLLMENT':
-          //The user must perform an enrollment, since the identification was performed with an older face tec version
           token = await getFaceAuthTokenRequest(scanref, faceAuthTokenType, authenticationMethod);
           break;
         default:
@@ -423,7 +395,6 @@ const String BASE_URL = 'ivs.idenfy.com';
 const String clientId = 'idenfySampleClientID';
 const String apiKey = 'PUT_YOUR_IDENFY_API_KEY_HERE';
 const String apiSecret = 'PUT_YOUR_IDENFY_API_SECRET_HERE';
-const FaceAuthenticationMethod faceAuthenticationMethod = FaceAuthenticationMethod.ACTIVE_LIVENESS;
 ```
 
 ## Callbacks
@@ -513,7 +484,7 @@ Currently, @idenfy/idenfysdk_flutter_plugin does not provide customization optio
 We suggest creating a fork of this repository. After editing the code, you can include the plugin in the following way:
 ```yaml
 dependencies:
-  idenfy_sdk_flutter: ^2.4.2
+  idenfy_sdk_flutter: ^2.5.2
     git: https://github.com/your_repo/FlutterSDK.git
 ```
 

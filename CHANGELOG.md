@@ -1,3 +1,54 @@
+## 2.5.2
+* iOS SDK updated to 8.4.2
+* Updated lottie-ios to 4.4.3
+* Increased minimum deployment target to iOS 13
+* Please update to this version to avoid Apple Review team [privacy manifest file](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files) warning
+
+## 2.5.1
+* iOS SDK updated to 8.4.1
+* Updated 3D Face liveness version
+* Updated lottie-ios to 4.4.1
+
+## 2.5.0
+* iOS SDK updated to 8.4.0
+* Android SDK updated to 8.4.1
+* Added photo validation after each step by default
+* Added passive liveness validation feature
+* Added rooted device, emulator detection
+* Added work permit document type
+* Updated 3D Face liveness version
+* Android targetSdk increased to API 34
+* Updated Android Gradle version to 8.1.2, Kotlin version to 1.9.20
+* Changed Android loading spinner animation
+* Android CameraX updated
+* 3D Face liveness error handling, retry logic improvements
+* Dynamic OnBoarding screen removed
+* Privacy policy submission fix
+* Other bug fixes 
+* If you have customized iOS or Android native code, please check out the api changes, that might affect you in the [iOS](https://documentation.idenfy.com/mobile/iOS/migration-guide/ios-migrations) and [Android](https://documentation.idenfy.com/mobile/Android/migration-guide/android-migrations) migration guides.
+
+## 2.4.6
+* Added documentation for public API
+* Refactored public enum files
+
+## 2.4.5
+* Increased network request timeout intervals
+* Improved network request retry logic
+
+## 2.4.4
+* Added network error logs
+
+## 2.4.3
+* Added new face detection descriptions 
+* Added support for additional step ordering
+* Removed instructions drawer option from camera view
+* Face authentication session improvements
+* iOS view instances, passed to the IdenfyViewsV2 class, will reset their state on repetitive launches.
+* Changed photo cropping to preserve higher resolution
+* Updated 3D Face liveness version
+* After capturing photos, camera results view will appear instantly
+* If you have customized iOS or Android native code, please check out the api changes, that might affect you in the [iOS](https://documentation.idenfy.com/mobile/iOS/migration-guide/ios-migrations) and [Android](https://documentation.idenfy.com/mobile/Android/migration-guide/android-migrations) migration guides.
+
 ## 2.4.2
 * Updated README with new links
 
