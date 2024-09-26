@@ -1,3 +1,42 @@
+## 2.5.7
+* iOS SDK updated to 8.5.7
+* Android SDK updated to 8.5.2
+* Updated 3D Face liveness version
+* iOS migrated to Swift 6.0. SDK is compatible with xCode 16
+* KYC Questionnaire FILE and IMAGE questions merged
+* Bug fixes
+
+## 2.5.6
+* iOS SDK updated to 8.5.3
+* Updated 3D Face liveness version
+* NFC document reading improvements
+* Bug fixes
+
+## 2.5.5
+* iOS SDK updated to 8.5.2
+* Android SDK updated to 8.5.1
+* Added Chinese simplified language support
+* Added 3D Face liveness upload attempt validation
+* Added missing Face authentication auto capture [feature](https://documentation.idenfy.com/face-auth/mobile-sdk/Android/FaceAuthenticationAndroid#auto-capture) translations
+
+## 2.5.4
+* Android, iOS SDK's updated to 8.5.0
+* Face authentication auto capture [feature](https://documentation.idenfy.com/face-auth/mobile-sdk/Android/FaceAuthenticationAndroid#auto-capture)
+* Updated 3D Face liveness version
+* Improved document blur, glare detection
+* Bug fixes
+
+## 2.5.3
+* iOS SDK updated to 8.4.5
+* Android SDK updated to 8.4.2
+* Added Danish, Greek, Croatian, Norwegian, Serbian, Finnish, Turkish languages
+* Added Image upload attempt validation
+* Added virtual camera detection for Android IDV [feature](https://documentation.idenfy.com/mobile/Android/android-sdk#virtual-camera-detection) (Will result in a failed identification)
+* Updated Document Recognition [feature](https://documentation.idenfy.com/mobile/Android/android-sdk#document-recognition)
+* Improved phone number validation for KYC questionnaire
+* Updated 3D Face liveness version for iOS
+* Bug fixes
+
 ## 2.5.2
 * iOS SDK updated to 8.4.2
 * Updated lottie-ios to 4.4.3
