@@ -23,8 +23,8 @@ if (flutterVersionName == null) {
 }
 
 android {
-    compileSdk 34
-    ndkVersion = "26.3.11579264"
+    compileSdk 35
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
@@ -34,7 +34,7 @@ android {
         applicationId "com.example.idenfy_sdk_flutter_example"
         multiDexEnabled true
         minSdk 24
-        targetSdk 34
+        targetSdk 35
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
