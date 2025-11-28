@@ -22,8 +22,6 @@ public class SwiftIdenfySdkFlutterPlugin: NSObject, @preconcurrency FlutterPlugi
                 
                 IdenfyCommonColors.idenfyMainColorV2 = UIColor.init("0082FF")
                 IdenfyCommonColors.idenfyMainDarkerColorV2 = UIColor.init("007EF5")
-                IdenfyConfirmationViewUISettingsV2.idenfyDocumentConfirmationViewDocumentStepCircleTintColor = UIColor.init("007EF5")
-                IdenfyConfirmationViewUISettingsV2.idenfyDocumentConfirmationViewUploadIconTintColor = UIColor.init("007EF5")
                 IdenfyToolbarUISettingsV2.idenfyDefaultToolbarLogoIconTintColor = nil
                 IdenfyToolbarUISettingsV2.idenfyDefaultToolbarBackIconTintColor = UIColor.init("007EF5")
                 IdenfyToolbarUISettingsV2.idenfyLanguageSelectionToolbarLanguageSelectionIconTintColor = UIColor.init("007EF5")
