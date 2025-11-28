@@ -1,11 +1,11 @@
 PODS:
   - Flutter (1.0.0)
-  - idenfy_sdk_flutter (2.6.2):
+  - idenfy_sdk_flutter (2.6.6):
     - Flutter
-    - iDenfySDK/iDenfyBlurGlareDetection (= 8.6.3)
-  - iDenfySDK/iDenfyBlurGlareDetection (8.6.3):
-    - lottie-ios (= 4.4.3)
-  - lottie-ios (4.4.3)
+    - iDenfySDK/iDenfyLiveness (= 8.7.6)
+  - iDenfySDK/iDenfyLiveness (8.7.6):
+    - lottie-ios (= 4.5.0)
+  - lottie-ios (4.5.0)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -23,10 +23,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/idenfy_sdk_flutter/ios"
 
 SPEC CHECKSUMS:
-  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  idenfy_sdk_flutter: 21bd37bed573cbc00e30de7ae8d2518300925b95
-  iDenfySDK: 08176da8abd1067756aa98205b57f35380754f4d
-  lottie-ios: fcb5e73e17ba4c983140b7d21095c834b3087418
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  idenfy_sdk_flutter: 2c728bcd97ec1698aa683cef658ad390ba7675bc
+  iDenfySDK: 5ef9724ecd794451cdf292b1c0cf5d6b98f960b3
+  lottie-ios: a881093fab623c467d3bce374367755c272bdd59
 
 PODFILE CHECKSUM: 1fb01fcd69b2071b938570c3678303e4e6ef6803
 

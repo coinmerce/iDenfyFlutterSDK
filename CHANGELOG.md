@@ -1,3 +1,36 @@
+## 2.6.6
+* Android SDK updated to 8.7.0
+* iOS SDK updated to 8.7.6
+* iDenfy support email removed from the contact info
+* Increased image compression quality & video resolution
+* Increased image upload speed
+* Updated Sentry SDK not to interfere with the client app **If you get any iOS crashes from iDenfyInternalLogger, please update to this version**
+* Updated Spanish translations
+* Updated 3D Face Liveness version
+* Updated iOS country selection UISearchBar to support iOS 26. **Please check out the api changes, that might affect you in the [migration guide](/mobile/iOS/migration-guide/ios-migrations)**
+* Bug fixes
+* **Android targeting API 36, updated to AGP 8.9.2**
+* **iOS SDK is built using XCode 16.4**
+
+## 2.6.5
+* Android, iOS SDK's updated to 8.6.8
+* Updated 3D Face Liveness version
+* iOS SDK built with XCode 26
+* Bug fixes
+
+## 2.6.4
+* Android, iOS SDK's updated to 8.6.7
+* Added EID document support (Bank ID, Smart-ID, CLEAR, OneID, Finnish Trust Network, MitID, Verimi, SPID)
+* Added Email verification [feature](https://documentation.idenfy.com/mobile/Android/android-additional-features#email-verification)
+* Added Phone Number verification [feature](https://documentation.idenfy.com/mobile/Android/android-additional-features#phone-number-verification)
+* Addeed Slovenian locale support
+* 3D Face Liveness version updated
+* Updated Android CameraX version
+* Updated Android Document recognition [feature](/mobile/Android/android-additional-features#document-recognition) version
+* Android SDK size reduced
+* Updated iOS Lottie version to 4.5.0
+* Bug fixes
+
 ## 2.6.3
 * Android updated to 8.6.5
 * Added a setting to disable mismatch tags alert dialog
