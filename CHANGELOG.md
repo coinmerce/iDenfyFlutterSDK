@@ -1,3 +1,45 @@
+## 2.7.1
+* Android SDK updated to 8.7.8
+* iOS SDK updated to 8.8.3
+* Added Chinese Traditional support for privacy policy
+
+## 2.7.0
+* Android SDK updated to 8.7.7
+* iOS SDK updated to 8.8.2
+* Added Chinese Traditional and Korean locale support
+
+## 2.6.9
+* Android SDK updated to 8.7.6
+* iOS SDK updated to 8.8.1
+* Added japanese locale support
+* Android SDK size reduced
+* Increased AGP version to 8.9.1
+* Fixed Android camera button disabled state alpha
+* Fixed Android custom dialogs background color change
+* Android default alert dialogs replaced with new XML layout
+* Fixed iOS continue button title color change
+* Fixed custom font passing issues
+* Lottie specific version unpinned from iOS SDK
+* Bug fixes
+
+## 2.6.8
+* Android SDK updated to 8.7.3
+* iOS SDK updated to 8.7.8
+* Updated 3D Face Liveness version. **Please update to this version if previous builds fail to pull**
+* Added tints for lottie animations
+* Bug fixes
+
+## 2.6.7
+* Android SDK updated to 8.7.1
+* iOS SDK updated to 8.7.7
+* Updated Android virtual camera detection [feature](https://documentation.idenfy.com/mobile/Android/android-additional-features#virtual-camera-detection) version
+* Polish translations updated
+* Android Face detection improvements & bug fixes
+* iOS NFC reading improved
+* iOS OpenSSL version updated
+* Bug fixes
+* **SDK is built using XCode 16.4**
+
 ## 2.6.6
 * Android SDK updated to 8.7.0
 * iOS SDK updated to 8.7.6
@@ -7,7 +49,7 @@
 * Updated Sentry SDK not to interfere with the client app **If you get any iOS crashes from iDenfyInternalLogger, please update to this version**
 * Updated Spanish translations
 * Updated 3D Face Liveness version
-* Updated iOS country selection UISearchBar to support iOS 26. **Please check out the api changes, that might affect you in the [migration guide](/mobile/iOS/migration-guide/ios-migrations)**
+* Updated iOS country selection UISearchBar to support iOS 26. **Please check out the api changes, that might affect you in the [migration guide](https://documentation.idenfy.com/mobile/iOS/migration-guide/ios-migrations)**
 * Bug fixes
 * **Android targeting API 36, updated to AGP 8.9.2**
 * **iOS SDK is built using XCode 16.4**
@@ -26,7 +68,7 @@
 * Addeed Slovenian locale support
 * 3D Face Liveness version updated
 * Updated Android CameraX version
-* Updated Android Document recognition [feature](/mobile/Android/android-additional-features#document-recognition) version
+* Updated Android Document recognition [feature](https://documentation.idenfy.com/mobile/Android/android-additional-features#document-recognition) version
 * Android SDK size reduced
 * Updated iOS Lottie version to 4.5.0
 * Bug fixes

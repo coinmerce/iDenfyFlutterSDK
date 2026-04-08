@@ -30,6 +30,7 @@ public class SwiftIdenfySdkFlutterPlugin: NSObject, @preconcurrency FlutterPlugi
                 IdenfyIdentificationResultsViewUISettingsV2.idenfyIdentificationResultsDividerIconStatusErrorTintColor = UIColor.init("007EF5")
                 IdenfyIdentificationResultsViewUISettingsV2.idenfyIdentificationResultsDividerIconStatusLoadingTintColor = UIColor.init("007EF5")
 
+                SdkVersionManager.platformWrapper = "flutter"
                 let idenfyController = IdenfyController.shared
                 idenfyController.initializeIdenfySDKV2WithManual(idenfySettingsV2: idenfySettingsV2)
                 let idenfyVC = idenfyController.instantiateNavigationController()
@@ -53,6 +54,7 @@ public class SwiftIdenfySdkFlutterPlugin: NSObject, @preconcurrency FlutterPlugi
                let withImmediateRedirect = arguments["withImmediateRedirect"] as? Bool,
                let authenticationToken = arguments["token"] as? String {
                 let idenfyFaceAuthUISettings = IdenfySettingsDecoder.decodeFaceAuthUISettings(arguments["idenfyFaceAuthUISettings"] as? [String : AnyObject?])
+                SdkVersionManager.platformWrapper = "flutter"
                 let idenfyController = IdenfyController.shared
                 let faceAuthenticationInitialization = FaceAuthenticationInitialization(authenticationToken: authenticationToken, withImmediateRedirect: withImmediateRedirect, idenfyFaceAuthUISettings: idenfyFaceAuthUISettings)
                 idenfyController.initializeFaceAuthentication(faceAuthenticationInitialization: faceAuthenticationInitialization)
