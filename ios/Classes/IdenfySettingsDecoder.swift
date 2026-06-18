@@ -86,6 +86,10 @@ class IdenfySettingsDecoder {
                 idenfyUISettingsV2.withCountryAndDocumentSelectionJoined = withCountryAndDocumentSelectionJoined
             }
 
+            if let useBottomSheetDialogs = uiSettingsMap["useBottomSheetDialogs"] as? Bool {
+                idenfyUISettingsV2 = idenfyUISettingsV2.withBottomSheetDialogs(useBottomSheetDialogs)
+            }
+
             if let documentFrameVisibility = uiSettingsMap["documentCameraFrameVisibility"] as? [String: Any],
                let visibilityValue = documentFrameVisibility["value"] as? String {
 

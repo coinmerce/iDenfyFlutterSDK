@@ -86,6 +86,11 @@ object IdenfySettingsDecoder {
                     uiSettingsMap["withCountryAndDocumentSelectionJoined"] as Boolean
             }
 
+            if (uiSettingsMap["useBottomSheetDialogs"] as? Boolean != null) {
+                idenfyUISettingsV2.useBottomSheetDialogs =
+                    uiSettingsMap["useBottomSheetDialogs"] as Boolean
+            }
+
             if (uiSettingsMap["documentCameraFrameVisibility"] as? Map<*, *> != null) {
                 if (uiSettingsMap["documentCameraFrameVisibility"] as? Map<*, *> != null) {
                     val enum = uiSettingsMap["documentCameraFrameVisibility"] as Map<*, *>

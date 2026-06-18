@@ -18,6 +18,7 @@ class IdenfyUISettings {
   final bool? mismatchTagsAlert;
   final DocumentCameraFrameVisibility? documentCameraFrameVisibility;
   final bool? withCountryAndDocumentSelectionJoined;
+  final bool? useBottomSheetDialogs;
 
   IdenfyUISettings(
       {this.isAdditionalSupportEnabled,
@@ -29,7 +30,8 @@ class IdenfyUISettings {
       this.immediateRedirectEnum,
       this.mismatchTagsAlert,
       this.documentCameraFrameVisibility,
-      this.withCountryAndDocumentSelectionJoined});
+      this.withCountryAndDocumentSelectionJoined,
+      this.useBottomSheetDialogs});
 
   Map<String, dynamic> toJson() => {
         'isAdditionalSupportEnabled': isAdditionalSupportEnabled,
@@ -42,7 +44,8 @@ class IdenfyUISettings {
         'immediateRedirectEnum': immediateRedirectEnum?.name,
         'mismatchTagsAlert': mismatchTagsAlert,
         'documentCameraFrameVisibility': documentCameraFrameVisibility?.toJson(),
-        'withCountryAndDocumentSelectionJoined': withCountryAndDocumentSelectionJoined
+        'withCountryAndDocumentSelectionJoined': withCountryAndDocumentSelectionJoined,
+        'useBottomSheetDialogs': useBottomSheetDialogs
       };
 }
 
@@ -59,6 +62,7 @@ class IdenfyUIBuilder {
   bool? mismatchTagsAlert;
   DocumentCameraFrameVisibility? documentCameraFrameVisibility;
   bool? countryAndDocumentSelectionJoined;
+  bool? useBottomSheetDialogs;
 
   IdenfyUIBuilder withAdditionalSupportView(bool isAdditionalSupportEnabled) {
     this.isAdditionalSupportEnabled = isAdditionalSupportEnabled;
@@ -120,6 +124,11 @@ class IdenfyUIBuilder {
     return this;
   }
 
+  IdenfyUIBuilder withBottomSheetDialogs(bool useBottomSheetDialogs) {
+    this.useBottomSheetDialogs = useBottomSheetDialogs;
+    return this;
+  }
+
   IdenfyUISettings build() {
     IdenfyUISettings idenfyUISettings = IdenfyUISettings(
         isAdditionalSupportEnabled: isAdditionalSupportEnabled,
@@ -132,7 +141,8 @@ class IdenfyUIBuilder {
         immediateRedirectEnum: immediateRedirectEnum,
         mismatchTagsAlert: mismatchTagsAlert,
         documentCameraFrameVisibility: documentCameraFrameVisibility,
-        withCountryAndDocumentSelectionJoined: countryAndDocumentSelectionJoined);
+        withCountryAndDocumentSelectionJoined: countryAndDocumentSelectionJoined,
+        useBottomSheetDialogs: useBottomSheetDialogs);
     return idenfyUISettings;
   }
 }

@@ -7,6 +7,7 @@ import 'package:idenfy_sdk_flutter/models/idenfy_settings.dart';
 import 'models/face_authentication_result.dart';
 import 'models/idenfy_face_auth_ui_settings.dart';
 import 'models/idenfy_identification_status.dart';
+import 'models/information_update_result.dart';
 
 class IdenfySdkFlutter {
   static const MethodChannel _channel =
@@ -42,6 +43,20 @@ class IdenfySdkFlutter {
     FaceAuthenticationResult faceAuthenticationResult =
         FaceAuthenticationResult.fromJson(jsonDecode(result));
     return faceAuthenticationResult;
+  }
+
+  /// Function to start request update session
+  /// @param token Generated request update token
+  static Future<InformationUpdateResult> startRequestUpdate(String token,
+      {IdenfySettings? idenfySettings}) async {
+    final dynamic result = await _channel.invokeMethod(
+        'startRequestUpdate', <String, dynamic>{
+      'authToken': token,
+      'idenfySettings': idenfySettings?.toJson()
+    });
+    InformationUpdateResult informationUpdateResult =
+        InformationUpdateResult.fromJson(jsonDecode(result));
+    return informationUpdateResult;
   }
 
   static Future<String> get platformVersion async {

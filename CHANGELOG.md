@@ -1,3 +1,14 @@
+## 2.7.3
+* Android, iOS SDK updated to 9.1.0
+* Addded Mobile ID eID, Philippines eID, IDIN document support
+* Added Arabic locale support
+* Added Request update feature
+* Updated 3D Face Liveness
+* Redesigned custom dialogs to bottom sheets
+* RTL layout support for Arabic locale
+* Slovak & Turkish translation fixes
+* Bug fixes
+
 ## 2.7.2
 * Android, iOS SDK updated to 9.0.0
 * New iDenfy privacy policy [view](https://documentation.idenfy.com/sdks/android/additional-features#custom-privacy-policy)
