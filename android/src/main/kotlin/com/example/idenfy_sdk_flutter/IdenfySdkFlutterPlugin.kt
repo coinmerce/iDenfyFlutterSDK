@@ -12,7 +12,7 @@ import com.idenfy.idenfySdk.api.models.IdenfyOnBoardingViewTypeEnum
 import com.idenfy.idenfySdk.api.models.ImmediateRedirectEnum
 import com.idenfy.idenfySdk.api.response.FaceAuthenticationResult
 import com.idenfy.idenfySdk.api.response.IdenfyIdentificationResult
-import com.idenfy.idenfySdk.camerasession.commoncamerasession.presentation.model.IdenfyInstructionsType
+import com.idenfy.idenfySdk.api.response.InformationUpdateStatus
 import com.idenfy.idenfySdk.api.ui.IdenfyFaceAuthUISettings
 import com.idenfy.idenfySdk.api.ui.IdenfyIdentificationResultsUISettingsV2
 import com.idenfy.idenfySdk.api.ui.IdenfyUISettingsV2
@@ -72,6 +72,18 @@ class IdenfySdkFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
                 IdenfyController.IDENFY_REQUEST_CODE,
                 faceAuthenticationInitialization
             )
+        } else if (call.method == "startRequestUpdate") {
+            mResult = result
+
+            val idenfySettingsV2 =
+                IdenfySettingsDecoder.decodeIdenfySettings(call.argument<Map<String, Any?>?>("idenfySettings"))
+            idenfySettingsV2.authToken = call.argument<String>("authToken")!!
+
+            IdenfyController.getInstance().initializeIdenfySDKV2WithManual(
+                this.activity,
+                IdenfyController.IDENFY_REQUEST_CODE,
+                idenfySettingsV2
+            )
         } else {
             //result.notImplemented()
         }
@@ -109,6 +121,13 @@ class IdenfySdkFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
                     val faceAuthenticationResult: FaceAuthenticationResult =
                         data!!.getParcelableExtra(IdenfyController.IDENFY_FACE_AUTHENTICATION_RESULT)!!
                     val jsonString = Gson().toJson(faceAuthenticationResult)
+                    mResult?.success(jsonString)
+                }
+
+                IdenfyController.IDENFY_REQUEST_UPDATE_RESULT_CODE -> {
+                    val informationUpdateStatus: InformationUpdateStatus =
+                        data!!.getParcelableExtra(IdenfyController.IDENFY_REQUEST_UPDATE_RESULT)!!
+                    val jsonString = Gson().toJson(mapOf("informationUpdateStatus" to informationUpdateStatus.name))
                     mResult?.success(jsonString)
                 }
             }

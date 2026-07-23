@@ -1,4 +1,4 @@
-## This is an official Flutter plugin, which provides an easier integration of iDenfy KYC services. This plugin offers [identity verification](#identity-verification-flow-usage) and [face authentication](#face-authentication-flow-usage) flows
+## This is an official Flutter plugin, which provides an easier integration of iDenfy KYC services. This plugin offers [identity verification](#identity-verification-flow-usage), [face authentication](#face-authentication-flow-usage) and [request update](#request-update-flow-usage) flows
 
 ## Table of contents
 - [Getting started](#getting-started)
@@ -14,9 +14,11 @@
 *   [Usage](#usage)
     - [Identity verification usage](#identity-verification-flow-usage)
     - [Face authentication usage](#face-authentication-flow-usage)
+    - [Request update usage](#request-update-flow-usage)
 *   [Callbacks](#callbacks)
     - [Identity verification callbacks](#identity-verification-flow-callbacks)
     - [Face authentication callbakcs](#face-authentication-flow-callbacks)
+    - [Request update callbacks](#request-update-flow-callbacks)
 *   [Additional customization](#additional-customization)
 *   [SDK Integration tutorials](#sdk-integration-tutorials)
 
@@ -25,7 +27,7 @@
 
 ### 1. Obtaining an authentication token
 
-The SDK requires token for starting initialization. [Token generation guide](https://documentation.idenfy.com/API/GeneratingIdentificationToken)
+The SDK requires token for starting initialization. [Token generation guide](https://documentation.idenfy.com/kyc/generate-token)
 
 ### 2. Availability information & new project setup
 
@@ -55,6 +57,8 @@ Minimum required versions by the platform:
 
 **IOS - 13.0**
 
+**iOS SDK is built using xCode 26.4.1**
+
 **Android - API 24**
 
 If you are starting a new Flutter project you can follow [Flutter install guide](https://flutter.dev/docs/get-started/install).
@@ -65,7 +69,7 @@ Once the setup is completed successfully, you can add iDenfy SDK dependencies.
 To add iDenfy SDK plugin, open your project's `pubspec.yaml` file and append it with the latest iDenfy SDK flutter plugin:
 ```yaml
 dependencies:
-  idenfy_sdk_flutter: ^2.7.1
+  idenfy_sdk_flutter: ^2.7.3
 ```
 
 #### 3.1 Configuring Android project
@@ -81,7 +85,6 @@ android {
 Configure your application's `gradle.properties` file:
 ```gradle
 android.useAndroidX=true
-android.enableJetifier=true
 ```
 
 ##### Proguard rules
@@ -243,7 +246,7 @@ Once you have an authentication token, which can be retrieved with following cod
               HiddenForSpecificCountriesAndDocumentTypes({
             'US': [DocumentTypeEnum.PASSPORT.name]
           }))
-          .withSkipInternalPrivacyPolicy(true)
+          .withMismatchTagsAlert(true)
           .build();
 
       IdenfySettings idenfySettings = IdenfyBuilder()
@@ -294,7 +297,7 @@ Calling IdenfySdkFlutter.start with provided authToken:
 
 ### Face authentication flow usage
 
-More on this flow, read [here](https://documentation.idenfy.com/face-auth/mobile-sdk/Android/FaceAuthenticationAndroid).
+More on this flow, read [here](https://documentation.idenfy.com/sdks/android/face-authentication).
 
 Firstly, import idenfysdkflutter.dart file:
 ```javascript
@@ -418,6 +421,76 @@ const String apiKey = 'PUT_YOUR_IDENFY_API_KEY_HERE';
 const String apiSecret = 'PUT_YOUR_IDENFY_API_SECRET_HERE';
 ```
 
+### Request update flow usage
+
+The request update flow allows requesting additional information from users who have already completed an identification. This includes proof of address (POA) documents, risk assessment, and questionnaires.
+
+Firstly, import idenfysdkflutter.dart file:
+```javascript
+import 'package:idenfy_sdk_flutter/idenfy_sdk_flutter.dart';
+```
+
+After successful integration you should be able to call IdenfySdkFlutter.startRequestUpdate method.
+
+If the project is not successfully compiled or runtime issues occur, make sure you have followed the steps. For better understanding you may check the sample app in this repository.
+
+To begin the request update flow, you need to generate a token by making a POST request to `/kyc/identifications/{scanRef}/request-information/`. The request body supports optional `additionalStepUploadRequired` (boolean) and `questionnaire` (string) fields.
+
+Everything can be done with following code, found in the example app:
+
+```javascript
+  Future<String> getRequestUpdateToken(String scanRef) async {
+    Map<String, dynamic> body = {
+      "additionalStepUploadRequired": _additionalStepUploadRequired,
+    };
+    if (_questionnaireIdController.text.isNotEmpty) {
+      body["questionnaire"] = _questionnaireIdController.text;
+    }
+
+    final response = await http.post(
+      Uri.https(Constants.BASE_URL,
+          '/kyc/identifications/$scanRef/request-information/'),
+      headers: <String, String>{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization':
+            'Basic ${base64Encode(utf8.encode('${Constants.apiKey}:${Constants.apiSecret}'))}',
+      },
+      body: jsonEncode(body),
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return jsonDecode(response.body)["tokenString"];
+    } else {
+      throw Exception('Failed to fetch request update token');
+    }
+  }
+
+  Future<void> callRequestUpdate(String scanRef) async {
+    InformationUpdateResult? informationUpdateResult;
+    Exception? localException;
+    try {
+      String token = await getRequestUpdateToken(scanRef);
+      informationUpdateResult =
+          await IdenfySdkFlutter.startRequestUpdate(token);
+    } on Exception catch (e) {
+      localException = e;
+    }
+
+    setState(() {
+      _informationUpdateResult = informationUpdateResult;
+      _exception = localException;
+    });
+  }
+```
+
+Please make sure to provide your cliendId, apikey and apisecret constants, they can be found in `constants.dart` file:
+```javascript
+const String BASE_URL = 'ivs.idenfy.com';
+const String clientId = 'idenfySampleClientID';
+const String apiKey = 'PUT_YOUR_IDENFY_API_KEY_HERE';
+const String apiSecret = 'PUT_YOUR_IDENFY_API_SECRET_HERE';
+```
+
 ## Callbacks
 
 ### Identity verification flow callbacks
@@ -499,6 +572,34 @@ Information about the FaceAuthenticationResult **faceAuthenticationStatus** stat
 |`FAILED`|The user completed face authentication flow and the authentication status, provided by an automated platform, is FAILED.
 |`EXIT`   |The user did not complete face authentication flow and the authentication status, provided by an automated platform, is EXIT.
 
+### Request update flow callbacks
+Callback from the SDK can be retrieved from IdenfySdkFlutter.startRequestUpdate future:
+````javascript
+    InformationUpdateResult? informationUpdateResult;
+    try {
+      informationUpdateResult = await IdenfySdkFlutter.startRequestUpdate(token);
+    } on Exception catch (e) {
+    }
+
+    setState(() {
+      _informationUpdateResult = informationUpdateResult;
+    });
+````
+Result is an `InformationUpdateResult` class with `InformationUpdateStatus` enum:
+
+```javascript
+class InformationUpdateResult {
+    InformationUpdateStatus informationUpdateStatus;
+}
+```
+
+Information about the InformationUpdateResult **informationUpdateStatus** statuses:
+
+|Name            |Description
+|-------------------|------------------------------------
+|`COMPLETED`   |The user completed the request update flow.
+|`EXPIRED`|The user cancelled the request update flow or the token has expired.
+
 ## Additional customization
 Currently, @idenfy/idenfysdk_flutter_plugin only provides IdenfySettings and IdenfyUISettings options via Dart code directly:
 
@@ -518,7 +619,9 @@ Currently, @idenfy/idenfysdk_flutter_plugin only provides IdenfySettings and Ide
             'LT': [DocumentTypeEnum.PASSPORT.name],
             'LV': [DocumentTypeEnum.ID_CARD.name]
           }))
-          .withSkipInternalPrivacyPolicy(true)
+          .withMismatchTagsAlert(true)
+          .withCountryAndDocumentSelectionJoined(true)
+          .withBottomSheetDialogs(true)
           .build();
 
       IdenfySettings idenfySettings = IdenfyBuilder()
@@ -536,7 +639,7 @@ For any additional SDK customization, you need to use the sample in this reposit
 We suggest creating a fork of this repository. After editing the code, you can include the plugin in the following way:
 ```yaml
 dependencies:
-  idenfy_sdk_flutter: ^2.7.1
+  idenfy_sdk_flutter: ^2.7.3
     git: https://github.com/your_repo/FlutterSDK.git
 ```
 
@@ -715,7 +818,7 @@ class IdenfySdkFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware, P
 ```
 
 
-Fore more extensive customization, please caerfully follow our [Android native SDK](https://documentation.idenfy.com/mobile/Android/android-ui-customization) guide and edit **IdenfysdkFlutterPlugin.kt** even further.
+Fore more extensive customization, please caerfully follow our [Android native SDK](https://documentation.idenfy.com/sdks/android/ui-customization) guide and edit **IdenfysdkFlutterPlugin.kt** even further.
 
 **IOS customization:**
 
@@ -885,10 +988,10 @@ public class SwiftIdenfySdkFlutterPlugin: NSObject, FlutterPlugin {
 
 UISettings classes for the rest of the screens can be found in our [repository](https://github.com/idenfy/iDenfyResources/tree/main/sdk/ios/uicustomization).
 
-Fore more extensive customization, please caerfully follow our [IOS native SDK guide](https://documentation.idenfy.com/mobile/iOS/ios-ui-customization) and edit **SwiftIdenfysdkFlutterPlugin.swift** even further.
+Fore more extensive customization, please caerfully follow our [IOS native SDK guide](https://documentation.idenfy.com/sdks/ios/ui-customization) and edit **SwiftIdenfysdkFlutterPlugin.swift** even further.
 
 ## SDK Integration tutorials
-For more information visit: [IOS SDK integration tutorial](https://documentation.idenfy.com/tutorials/mobile-sdk/IosSampleProjectTutorial) and [Android SDK integration tutorial](https://documentation.idenfy.com/tutorials/mobile-sdk/AndroidSampleProjectTutorial)
+For more information visit: [IOS SDK integration tutorial](https://documentation.idenfy.com/sdks/ios/quickstart) and [Android SDK integration tutorial](https://documentation.idenfy.com/sdks/android/quickstart)
 
 
 
