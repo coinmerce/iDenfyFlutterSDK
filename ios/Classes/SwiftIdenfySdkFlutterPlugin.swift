@@ -60,6 +60,25 @@ public class SwiftIdenfySdkFlutterPlugin: NSObject, @preconcurrency FlutterPlugi
                     }
                 })
             }
+        } else if call.method == "startRequestUpdate" {
+            if let arguments = call.arguments as? [String: Any],
+               let authToken = arguments["authToken"] as? String {
+
+                let idenfySettingsV2: IdenfySettingsV2 = IdenfySettingsDecoder.decodeIdenfySettings(arguments["idenfySettings"] as? [String : AnyObject?], authToken)
+                SdkVersionManager.platformWrapper = "flutter"
+                let idenfyController = IdenfyController.shared
+                idenfyController.initializeIdenfySDKV2WithManual(idenfySettingsV2: idenfySettingsV2)
+                let idenfyVC = idenfyController.instantiateNavigationController()
+
+                UIApplication.shared.keyWindow?.rootViewController?.present(idenfyVC, animated: true, completion: nil)
+
+                idenfyController.handleIdenfyCallbacksForRequestUpdate(requestUpdateResult: {
+                    informationUpdateStatus
+                    in
+                    let jsonString = "{\"informationUpdateStatus\":\"\(informationUpdateStatus.rawValue)\"}"
+                    result(jsonString)
+                })
+            }
         }
     }
 }

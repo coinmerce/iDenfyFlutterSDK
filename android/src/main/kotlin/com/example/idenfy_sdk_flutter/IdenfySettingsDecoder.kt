@@ -76,9 +76,19 @@ object IdenfySettingsDecoder {
                 val enum = (uiSettingsMap["immediateRedirectEnum"] as String).camelToSnakeCase()
                 idenfyUISettingsV2.immediateRedirectEnum = ImmediateRedirectEnum.valueOf(enum)
             }
-            if (uiSettingsMap["skipInternalPrivacyPolicyView"] as? Boolean != null) {
-                idenfyUISettingsV2.skipInternalPrivacyPolicyView =
-                    uiSettingsMap["skipInternalPrivacyPolicyView"] as Boolean
+            if (uiSettingsMap["mismatchTagsAlert"] as? Boolean != null) {
+                idenfyUISettingsV2.mismatchTagsAlert =
+                    uiSettingsMap["mismatchTagsAlert"] as Boolean
+            }
+
+            if (uiSettingsMap["withCountryAndDocumentSelectionJoined"] as? Boolean != null) {
+                idenfyUISettingsV2.withCountryAndDocumentSelectionJoined =
+                    uiSettingsMap["withCountryAndDocumentSelectionJoined"] as Boolean
+            }
+
+            if (uiSettingsMap["useBottomSheetDialogs"] as? Boolean != null) {
+                idenfyUISettingsV2.useBottomSheetDialogs =
+                    uiSettingsMap["useBottomSheetDialogs"] as Boolean
             }
 
             if (uiSettingsMap["documentCameraFrameVisibility"] as? Map<*, *> != null) {

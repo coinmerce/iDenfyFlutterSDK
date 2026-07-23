@@ -17,6 +17,7 @@ import 'package:idenfy_sdk_flutter/models/idenfy_ui_settings.dart';
 import 'package:idenfy_sdk_flutter/models/immediate_redirect_enum.dart';
 import 'constants.dart' as Constants;
 import 'face_authentication_start_screen.dart';
+import 'request_update_start_screen.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -77,7 +78,9 @@ class _MyAppState extends State<MyApp> {
               HiddenForSpecificCountriesAndDocumentTypes({
             'US': [DocumentTypeEnum.PASSPORT.name]
           }))
-          .withSkipInternalPrivacyPolicy(true)
+          .withMismatchTagsAlert(true)
+          .withCountryAndDocumentSelectionJoined(true)
+          .withBottomSheetDialogs(true)
           .build();
 
       IdenfySettings idenfySettings = IdenfyBuilder()
@@ -114,90 +117,121 @@ class _MyAppState extends State<MyApp> {
           systemOverlayStyle:
               SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            topTitle(),
-            Spacer(),
-            IntrinsicHeight(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              splashFactory: NoSplash.splashFactory,
-                              backgroundColor: Colors.transparent,
-                              disabledBackgroundColor: Colors.transparent,
-                              shadowColor: Colors.transparent),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Image.asset(
-                                  'assets/idenfy_ic_documents_type_selection_passport_front_v2.png',
-                                  width: 90,
-                                  fit: BoxFit.fitWidth),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
-                                child: Text(
-                                  "IDENTIFICATION UI",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.grey),
-                                ),
-                              )
-                            ],
-                          ),
-                          onPressed: initIdenfySdk)),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: VerticalDivider(color: Colors.black, thickness: 1.2),
-                  ),
-                  Expanded(
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              splashFactory: NoSplash.splashFactory,
-                              backgroundColor: Colors.transparent,
-                              disabledBackgroundColor: Colors.transparent,
-                              shadowColor: Colors.transparent),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(left: 16),
-                                child: Image.asset(
-                                    'assets/idenfy_ic_face_step_v2.png',
-                                    width: 90,
-                                    fit: BoxFit.fitWidth),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                topTitle(),
+                SizedBox(height: 40),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            splashFactory: NoSplash.splashFactory,
+                            backgroundColor: Colors.transparent,
+                            disabledBackgroundColor: Colors.transparent,
+                            shadowColor: Colors.transparent),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.asset(
+                                'assets/idenfy_ic_documents_type_selection_passport_front_v2.png',
+                                width: 90,
+                                fit: BoxFit.fitWidth),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: Text(
+                                "IDENTIFICATION",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.grey),
                               ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 12, right: 8),
-                                child: Text(
-                                  "FACE AUTHENTICATION",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.grey),
-                                ),
-                              )
-                            ],
-                          ),
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    FaceAuthenticationStartScreen(),
+                            )
+                          ],
+                        ),
+                        onPressed: initIdenfySdk),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 80, vertical: 20),
+                      child: Divider(color: Colors.black, thickness: 1.2),
+                    ),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            splashFactory: NoSplash.splashFactory,
+                            backgroundColor: Colors.transparent,
+                            disabledBackgroundColor: Colors.transparent,
+                            shadowColor: Colors.transparent),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.asset('assets/idenfy_ic_face_step_v2.png',
+                                width: 90, fit: BoxFit.fitWidth),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 12),
+                              child: Text(
+                                "FACE AUTHENTICATION",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.grey),
                               ),
-                            );
-                          }))
-                ],
-              ),
+                            )
+                          ],
+                        ),
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  FaceAuthenticationStartScreen(),
+                            ),
+                          );
+                        }),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 80, vertical: 20),
+                      child: Divider(color: Colors.black, thickness: 1.2),
+                    ),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            splashFactory: NoSplash.splashFactory,
+                            backgroundColor: Colors.transparent,
+                            disabledBackgroundColor: Colors.transparent,
+                            shadowColor: Colors.transparent),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.asset(
+                                'assets/idenfy_ic_documents_type_selection_passport_front_v2.png',
+                                width: 90,
+                                fit: BoxFit.fitWidth),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: Text(
+                                "REQUEST UPDATE",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                            )
+                          ],
+                        ),
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  RequestUpdateStartScreen(),
+                            ),
+                          );
+                        }),
+                  ],
+                ),
+                SizedBox(height: 40),
+                _idenfySDKresult != null
+                    ? idenfyResult()
+                    : (_exception != null ? exceptionTitle() : Container()),
+                SizedBox(height: 24),
+              ],
             ),
-            Spacer(),
-            _idenfySDKresult != null
-                ? idenfyResult()
-                : (_exception != null ? exceptionTitle() : Container()),
-            Spacer(),
-          ],
+          ),
         ),
       ),
     );
