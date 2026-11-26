@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  iDenfy picks country flag drawables by name at runtime, so the resource shrinker (release builds
+  with optimization enabled) removes them as unused. Keep them. This file is not packaged into the APK.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@drawable/idenfy_ic_documents_issuing_country_selection_flag_v2_*" />
